@@ -6,7 +6,7 @@ h1{
 
 body {
 	background-color: grey;
-	background-image: url(../BG.png);
+	/*background-image: url(../BG.png);*/
 	width:100%;
 	height:50%;
 	font-style: italic;
@@ -27,9 +27,12 @@ body {
 	width:70%;
 	position: absolute;
 	margin: 0px;
-	padding: 5px;
+	padding: 0px;
 	right: 0px;
 	border: solid;
+	border-color: black;
+ 	border-width: 1px;
+
 
 
 
@@ -54,9 +57,12 @@ body>div {
  float: left;
  margin-left: 10%;
  margin-bottom: 5%;
- padding:5px;
+ padding:0px;
  position: relative;
  border: solid;
+ border-color: black;
+ border-width: 1px;
+
 }
 
 h1 {
@@ -81,9 +87,12 @@ h1 {
 	width:70%;
 	position: absolute;
 	margin: 0px;
-	padding: 5px;
+	padding: 0px;
 	right: 0px;
 	border: solid;
+	border-color: black;
+ 	border-width: 1px;
+
 
 }
 
@@ -104,9 +113,11 @@ body>div {
  border-color: red;
  float: left;
  margin-left: 11%;
- padding:5px;
+ padding:0px;
  position: relative;
  border: solid;
+ border-color: black;
+ border-width: 1px;
 }
 
 #hijack {
@@ -119,8 +130,11 @@ body>div {
  float: left;
  margin-top: 80px;
  margin-left: 11%;
- padding:5px;
+ padding:0px;
  position: relative;
+ border: solid;
+  border-color: black;
+ border-width: 1px;
 }
 
 h1 {
@@ -153,6 +167,8 @@ h1 {
 	padding: 5px;
 	right: 0px;
 	border: solid;
+	border-color: black;
+ 	border-width: 1px;
 
 }
 
@@ -173,10 +189,13 @@ body>div {
  border-color: red;
  margin-left: 25%;
  margin-bottom: 5%;
- padding:5px;
+ padding:0px;
  position: relative;
  alignment-baseline: central;
  border: solid;
+ border-color: black;
+ border-width: 1px;
+
 }
 
 h1 {
