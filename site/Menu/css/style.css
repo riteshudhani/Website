@@ -16,6 +16,8 @@ body {
 	box-sizing: border-box;
 }
 
+
+
 @media (min-width: 992px)
 {
 .dish {
@@ -27,6 +29,9 @@ body {
 	margin: 0px;
 	padding: 5px;
 	right: 0px;
+	border: solid;
+
+
 
 
 }
@@ -36,7 +41,7 @@ body {
 	background-color:grey;
 	border: 10px;
 	border-color: red;
-	padding-top: 40px;
+	padding-top: 80px;
 }
 
 body>div {
@@ -51,6 +56,7 @@ body>div {
  margin-bottom: 5%;
  padding:5px;
  position: relative;
+ border: solid;
 }
 
 h1 {
@@ -77,7 +83,7 @@ h1 {
 	margin: 0px;
 	padding: 5px;
 	right: 0px;
-
+	border: solid;
 
 }
 
@@ -100,6 +106,7 @@ body>div {
  margin-left: 11%;
  padding:5px;
  position: relative;
+ border: solid;
 }
 
 #hijack {
@@ -145,7 +152,7 @@ h1 {
 	margin: 0px;
 	padding: 5px;
 	right: 0px;
-
+	border: solid;
 
 }
 
@@ -169,6 +176,7 @@ body>div {
  padding:5px;
  position: relative;
  alignment-baseline: central;
+ border: solid;
 }
 
 h1 {
@@ -183,4 +191,16 @@ h1 {
  alignment-baseline: central;
 }
 
+}
+
+#a{
+	background-color: 000000;
+}
+
+#b{
+	background-color: green;
+}
+
+#c{
+	background-color: red;
 }
