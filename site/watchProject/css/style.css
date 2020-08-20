@@ -1,0 +1,250 @@
+h1{
+	text-align: center;
+	color: black;
+	font-size: 36px;
+}
+
+body {
+	background-color: grey;
+	/*background-image: url(../BG.png);*/
+	/*width:100%;
+	height:50%;*/
+	/*font-style: italic;*/
+}
+
+* {
+	box-sizing: border-box;
+}
+
+
+
+/*@media (min-width: 992px)
+{*/
+/*.dish {
+	font-size: 24px;
+	text-align: center;
+	background-color: black;
+	width:70%;
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	right: 0px;
+	border: solid;
+	border-color: black;
+ 	border-width: 1px;
+}*/
+/*
+p {
+
+  float: right;
+}*/
+
+#pausebutton{
+	position: absolute;
+	right: 0px;
+	bottom:0px;
+}
+
+.button{
+	/*font-size: 18px;
+	background-color:grey;
+	border: 10px;
+	border-color: red;
+	padding-top: 80px;*/
+	width: 60px;
+    height: 60px;
+ /*   border-radius: 60px;
+    position: center;*/
+    background-color:white;
+    border-radius: 50%;
+    border: none;
+    /*vertical-align: middle;*/
+    /*position: relative;
+    top: 50%;*/
+    margin-top: 130px;
+    /*margin-bottom: auto;*/
+    
+    margin-left: auto;
+  	margin-right: auto;
+	outline:none;    
+
+}
+
+body>div {
+ width: 33%;
+ height:300px;
+ background-color:grey;
+ color: white;
+ /*text-align: center;*/
+ float: left;
+ /*margin-left: 0%;
+ margin-bottom: 0%;*/
+ /*padding:0px;
+ position: relative;*/
+ border: solid;
+ border-color: black;
+ border-width: 1px;
+ position: relative;
+
+ 
+
+}
+/*
+h1 {
+ width: 50%;
+ text-align: center;
+ border: 10px;
+ color: white;
+ border-color: red;
+ margin-left: 25%;
+ padding:5px;
+ position: relative;
+ alignment-baseline: central;
+}*/
+/*}
+
+/*@media (min-width: 768px) and (max-width: 991px)
+{
+.dish {
+	font-size: 24px;
+	text-align: center;
+	background-color: black;
+	width:70%;
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	right: 0px;
+	border: solid;
+	border-color: black;
+ 	border-width: 1px;
+
+
+}
+
+.description{
+	font-size: 18px;
+	background-color:grey;
+	border: 10px;
+	border-color: red;
+	padding-top: 40px;
+}
+
+body>div {
+ width: 33%;
+ background-color:grey;
+ color: white;
+ text-align: center;
+ border: 10px;
+ border-color: red;
+ float: left;
+ margin-left: 11%;
+ padding:0px;
+ position: relative;
+ border: solid;
+ border-color: black;
+ border-width: 1px;
+}
+
+#hijack {
+ width: 78%;
+ background-color:grey;
+ color: white;
+ text-align: center;
+ border: 10px;
+ border-color: red;
+ float: left;
+ margin-top: 80px;
+ margin-left: 11%;
+ padding:0px;
+ position: relative;
+ border: solid;
+  border-color: black;
+ border-width: 1px;
+}
+
+h1 {
+ width: 50%;
+ text-align: center;
+ border: 10px;
+ color: white;
+ border-color: red;
+ margin-left: 25%;
+ padding:5px;
+ position: relative;
+ alignment-baseline: central;
+}
+
+}
+
+
+
+
+
+@media (max-width: 767px)
+{
+.dish {
+	font-size: 24px;
+	text-align: center;
+	background-color: black;
+	width:70%;
+	position: absolute;
+	margin: 0px;
+	padding: 5px;
+	right: 0px;
+	border: solid;
+	border-color: black;
+ 	border-width: 1px;
+
+}
+
+.description{
+	font-size: 18px;
+	background-color:grey;
+	border: 10px;
+	border-color: red;
+	padding-top: 60px;
+}
+
+body>div {
+ width: 50%;
+ background-color:grey;
+ color: white;
+ text-align: center;
+ border: 10px;
+ border-color: red;
+ margin-left: 25%;
+ margin-bottom: 5%;
+ padding:0px;
+ position: relative;
+ alignment-baseline: central;
+ border: solid;
+ border-color: black;
+ border-width: 1px;
+
+}
+
+h1 {
+ width: 50%;
+ text-align: center;
+ border: 10px;
+ color: white;
+ border-color: red;
+ margin-left: 25%;
+ padding:5px;
+ position: relative;
+ alignment-baseline: central;
+}
+
+}
+
+#a{
+	background-color: 000000;
+}
+
+#b{
+	background-color: green;
+}
+
+#c{
+	background-color: red;
+}*/
