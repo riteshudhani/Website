@@ -51,8 +51,8 @@ p {
 	border: 10px;
 	border-color: red;
 	padding-top: 80px;*/
-	width: 60px;
-    height: 60px;
+	/*width: 245px;
+    height: 245px;*/
  /*   border-radius: 60px;
     position: center;*/
     background-color:white;
@@ -61,7 +61,7 @@ p {
     /*vertical-align: middle;*/
     /*position: relative;
     top: 50%;*/
-    margin-top: 130px;
+   /* margin-top: 57.5px;*/
     /*margin-bottom: auto;*/
     
     margin-left: auto;
@@ -71,8 +71,8 @@ p {
 }
 
 body>div {
- width: 33%;
- height:300px;
+ width: 33.33%;
+ height:360px;
  background-color:grey;
  color: white;
  /*text-align: center;*/
