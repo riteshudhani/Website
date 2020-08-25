@@ -1,0 +1,33 @@
+#connect {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #fce623bf;
+    border: none;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 10000000;
+}
+
+#arm-cursor {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    position: absolute;
+    /*background-color: #d00d4fd6;*/
+    background-color: #d00d4f4f;
+    z-index: 10000000;
+}
+
+.bulls-eye {
+    position: relative;
+    /* background-color: #2196f3b8; */
+    background-color: white;
+    z-index: 10000000;
+    border-radius: 60px;
+    width: 0px; 
+    height: 0px; 
+    left: 30px; 
+    top: 30px;
+}
