@@ -21,6 +21,7 @@ body.appendChild(connectButton);
 var armCursor = document.createElement('div');
 armCursor.id = "arm-cursor";
 armCursor.style.border = "none";
+armCursor.addEventListener("click",cursorClicked);
 body.appendChild(armCursor);
 
 var bullsEye = document.createElement("div");
@@ -33,6 +34,21 @@ var lastReadValueResponse = 0;
 
 var cursorHistory = [];
 var isDwelling = false;
+
+function cursorClicked(e){
+    var insidebutton0 = button0HoverCheck(e.clientX, e.clientY);
+    var insidebutton1 = button1HoverCheck(e.clientX, e.clientY);
+
+    if (insidebutton0 && button0.overState === "over")
+    {
+        simulate(document.getElementById("button0"), "click");
+    }
+
+    if (insidebutton1 && MyButton1.overState === "over")
+    {
+        simulate(MyButton1, "click");
+    }
+}
 
 function init(){
     webSocket = new WebSocket("ws://192.168.0.51:4000/arm");
@@ -149,7 +165,7 @@ function button0HoverCheck(x ,y) {
 function button1HoverCheck(x , y) {
  //   var but1 = document.getElementById("button1");
     var totalWidth = (armCursor.offsetWidth  + MyButton1.offsetWidth )/2;
-    var distance = Math.sqrt(Math.pow(x-MyButton1.offsetWidth/2-MyButton1.offsetLeft ,2) + Math.pow(y-MyButton1.offsetWidth/2-MyButton1.offsetTop,2));;
+    var distance = Math.sqrt(Math.pow(x-MyButton1.offsetWidth/2-MyButton1.offsetLeft -MyButton1.parentNode.offsetLeft,2) + Math.pow(y-MyButton1.offsetWidth/2-MyButton1.offsetTop -MyButton1.parentNode.offsetTop,2));;
     var inside = false;
     if(distance*100 < totalWidth*100)
         inside =true;
