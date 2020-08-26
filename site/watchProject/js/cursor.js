@@ -20,6 +20,7 @@ body.appendChild(connectButton);
 // Insert cursor in page
 var armCursor = document.createElement('div');
 armCursor.id = "arm-cursor";
+armCursor.style.border = "none";
 body.appendChild(armCursor);
 
 var bullsEye = document.createElement("div");
@@ -67,7 +68,8 @@ function handleMessage(evt) {
 
 
 function addHistory(x, y){
-    if (cursorHistory.length == 80){
+   // if (cursorHistory.length == 80){
+     if (cursorHistory.length == 80){
         cursorHistory.shift();
     }
     cursorHistory.push([x, y]);
@@ -76,8 +78,8 @@ function addHistory(x, y){
 var resetBullsEye = function(selection){
     selection.style('width', '0px')
         .style('height', '0px')
-        .style('left', '30px')
-        .style('top', '30px');
+        .style('left', '15px')
+        .style('top', '15px');
 }
 
 var interruptDwell = function(){
@@ -92,8 +94,8 @@ var animateDwell = function(){
         .transition()
         .duration(3000)
         .ease(d3.easeLinear)
-        .style('width', '60px')
-        .style('height', '60px')
+        .style('width', '30px')
+        .style('height', '30px')
         .style('left', '0px')
         .style('top', '0px')
         .on('end', function(){
@@ -112,22 +114,129 @@ function sd(array){
 }
 
 function evaluateDwell(){
+   // if (cursorHistory.length < 80) return;
     if (cursorHistory.length < 80) return;
 
     let sdx = sd(cursorHistory.map(p => p[0]));
     let sdy = sd(cursorHistory.map(p => p[1]));
 
+    //console.log(sdx, " ", sdy);
+
     if (sdx < 5 && sdy < 5 && !isDwelling)
+    {
+
         animateDwell();
+    }
 
     if ((sdx > 5 || sdy > 5) && isDwelling)
         interruptDwell();
 
 }
 
+function button0HoverCheck(x ,y) {
+
+    var totalWidth = (armCursor.offsetWidth  + button0.offsetWidth )/2;
+    var distance = Math.sqrt(Math.pow(x-950 ,2) + Math.pow(y-542,2));
+    var inside = false;
+    if(distance*100 < totalWidth*100)
+        inside =true;
+   // console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
+  
+    return inside;
+}
+
+
+function button1HoverCheck(x , y) {
+ //   var but1 = document.getElementById("button1");
+    var totalWidth = (armCursor.offsetWidth  + MyButton1.offsetWidth )/2;
+    var distance = Math.sqrt(Math.pow(x-MyButton1.offsetWidth/2-MyButton1.offsetLeft ,2) + Math.pow(y-MyButton1.offsetWidth/2-MyButton1.offsetTop,2));;
+    var inside = false;
+    if(distance*100 < totalWidth*100)
+        inside =true;
+    console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
+  
+    return inside;
+
+}
+
 function mousemovefunc(e) {
     armCursor.style.top = e.clientY -15 + "px";
     armCursor.style.left = e.clientX -15 + "px";
+    addHistory(e.clientX, e.clientY);
+
+    console.log (e.clientX, " ", e.clientY);
+    var insidebutton0 = button0HoverCheck(e.clientX, e.clientY);
+    var insidebutton1 = button1HoverCheck(e.clientX, e.clientY);
+
+    if (insidebutton0 && button0.overState === "out")
+    {
+        simulate(document.getElementById("button0"), "mouseover");
+    }
+
+    if (!insidebutton0 && button0.overState === "over")
+    {
+        simulate(document.getElementById("button0"), "mouseout");
+    }
+
+
+    if (insidebutton1 && MyButton1.overState === "out")
+    {
+        simulate(MyButton1, "mouseover");
+    }
+
+    if (!insidebutton1 && MyButton1.overState === "over")
+    {
+        simulate(MyButton1, "mouseout");
+    }
+
+/*
+    if(ret != undefined)
+    {
+        ret = "mouse" + ret;
+        simulate(MyButton1, ret);   
+    }*/
+    
+  //  if (insidebutton1 && Button1.overState === "out")
+  //  {
+  //      simulate(document.getElementById("button1"), "mouseover");
+  //  }
+
+  //  if (!insidebutton1 && Button1.overState === "over")
+  //  {
+  //      simulate(document.getElementById("button1"), "mouseout");
+  //  }
+
+   // if (insidebutton0 && Button1.overState === "out")
+  //  {
+   //     simulate(document.getElementById("button1"), "mouseout");
+   // }
+
+//test simulator
+  /*  if(e.clientX >= 800 && e.clientX < 1000)
+    {
+        if(button0.overState == "out") {
+            simulate(document.getElementById("button0"), "mouseover");
+            console.log("enter called" + e.clientX);
+        }
+        
+    }
+    if(e.clientX >= 1300 && e.clientX < 1920)
+    {
+        if(button0.overState == "over") {
+            simulate(document.getElementById("button0"), "mouseout");
+            console.log("leave called" + e.clientX);
+        }
+        
+    }*/
+
+//test over
+    /*var hoverElement = document.elementFromPoint(e.clientY, e.clientX);
+
+    if(hoverElement !== undefined)
+    {
+        console.log (hoverElement.id);
+    }*/
+    //hoverElement.click();
 }
 
 

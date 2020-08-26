@@ -17,7 +17,8 @@
     position: absolute;
     /*background-color: #d00d4fd6;*/
     background-color: #d00d4f4f;
-    z-index: 10000000;
+    /*z-index: 10000000;*/
+    z-index: 100;
 }
 
 .bulls-eye {
@@ -25,9 +26,15 @@
     /* background-color: #2196f3b8; */
     background-color: white;
     z-index: 10000000;
-    border-radius: 60px;
+    border-radius: 30px;
     width: 0px; 
     height: 0px; 
-    left: 30px; 
-    top: 30px;
+    left: 15px; 
+    top: 15px;
 }
+
+
+* { 
+        cursor: none; 
+        box-sizing: border-box;
+    } 
