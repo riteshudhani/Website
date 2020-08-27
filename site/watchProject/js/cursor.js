@@ -65,7 +65,7 @@ function cursorClicked(e){
 }
 
 function init(){
-    webSocket = new WebSocket("ws://192.168.0.51:4000/arm");
+    webSocket = new WebSocket("ws://192.168.0.158:4000/arm");
     webSocket.onmessage = handleMessage;
     connectButton.remove();
 }
@@ -96,6 +96,30 @@ function handleMessage(evt) {
     addHistory(x, y);
     g_xcursor = x;
     g_ycursor = y;
+
+    var insidebutton0 = button0HoverCheck(x+15, y+15);
+    var insidebutton1 = button1HoverCheck(x+15, y+15);
+
+    if (insidebutton0 && button0.overState === "out")
+    {
+        simulate(document.getElementById("button0"), "mouseover");
+    }
+
+    if (!insidebutton0 && button0.overState === "over")
+    {
+        simulate(document.getElementById("button0"), "mouseout");
+    }
+
+
+    if (insidebutton1 && MyButton1.overState === "out")
+    {
+        simulate(MyButton1, "mouseover");
+    }
+
+    if (!insidebutton1 && MyButton1.overState === "over")
+    {
+        simulate(MyButton1, "mouseout");
+    }
 }
 
 
