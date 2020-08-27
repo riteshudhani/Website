@@ -1,6 +1,8 @@
 function docLoadedFuncCursor()
 {
 
+var g_xcursor = 0, g_ycursor =0;;
+
 var WIDTH  = window.innerWidth,
 HEIGHT = window.innerHeight;
 
@@ -21,8 +23,20 @@ body.appendChild(connectButton);
 var armCursor = document.createElement('div');
 armCursor.id = "arm-cursor";
 armCursor.style.border = "none";
+//armCursor.textContent = "."
+/*var str = "a.";
+var result = str.bold();
+armCursor.innerHTML = result;
+armCursor.textContent.bold();
+armCursor.style.textAlign = "center";
+armCursor.style.fontSize = "50px"*/
+
 armCursor.addEventListener("click",cursorClicked);
 body.appendChild(armCursor);
+
+var markerDot = document.createElement("div");
+markerDot.className = "markerDot"
+armCursor.appendChild(markerDot);
 
 var bullsEye = document.createElement("div");
 bullsEye.className = "bulls-eye";
@@ -80,12 +94,14 @@ function handleMessage(evt) {
     armCursor.style.top = y + "px";
     armCursor.style.left = x + "px";
     addHistory(x, y);
+    g_xcursor = x;
+    g_ycursor = y;
 }
 
 
 function addHistory(x, y){
    // if (cursorHistory.length == 80){
-     if (cursorHistory.length == 80){
+     if (cursorHistory.length == 5){
         cursorHistory.shift();
     }
     cursorHistory.push([x, y]);
@@ -123,6 +139,8 @@ var animateDwell = function(){
     isDwelling = true;
 }
 
+//window.animateDwell =animateDwell;
+
 function sd(array){
     const n = array.length;
     const mean = array.reduce((a,b) => a+b)/n;
@@ -131,28 +149,29 @@ function sd(array){
 
 function evaluateDwell(){
    // if (cursorHistory.length < 80) return;
-    if (cursorHistory.length < 80) return;
+    if (cursorHistory.length < 5) return;
 
     let sdx = sd(cursorHistory.map(p => p[0]));
     let sdy = sd(cursorHistory.map(p => p[1]));
 
     //console.log(sdx, " ", sdy);
 
-    if (sdx < 5 && sdy < 5 && !isDwelling)
+    if (/*sdx < 5 && sdy < 5 && */!isDwelling && (button0HoverCheck(g_xcursor,g_ycursor) || button1HoverCheck(g_xcursor,g_ycursor)))
     {
 
         animateDwell();
     }
 
-    if ((sdx > 5 || sdy > 5) && isDwelling)
+    if (/*(sdx > 5 || sdy > 5) &&*/ isDwelling)
         interruptDwell();
 
 }
 
 function button0HoverCheck(x ,y) {
 
-    var totalWidth = (armCursor.offsetWidth  + button0.offsetWidth )/2;
-    var distance = Math.sqrt(Math.pow(x-950 ,2) + Math.pow(y-542,2));
+    var totalWidth = (/*armCursor.offsetWidth  +*/ button0.offsetWidth )/2;
+    //var distance = Math.sqrt(Math.pow(x-950 ,2) + Math.pow(y-542,2));
+    var distance = Math.sqrt(Math.pow(x-960 ,2) + Math.pow(y-540,2));
     var inside = false;
     if(distance*100 < totalWidth*100)
         inside =true;
@@ -164,12 +183,12 @@ function button0HoverCheck(x ,y) {
 
 function button1HoverCheck(x , y) {
  //   var but1 = document.getElementById("button1");
-    var totalWidth = (armCursor.offsetWidth  + MyButton1.offsetWidth )/2;
+    var totalWidth = (/*armCursor.offsetWidth  +*/ MyButton1.offsetWidth )/2;
     var distance = Math.sqrt(Math.pow(x-MyButton1.offsetWidth/2-MyButton1.offsetLeft -MyButton1.parentNode.offsetLeft,2) + Math.pow(y-MyButton1.offsetWidth/2-MyButton1.offsetTop -MyButton1.parentNode.offsetTop,2));;
     var inside = false;
     if(distance*100 < totalWidth*100)
         inside =true;
-    console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
+   // console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
   
     return inside;
 
@@ -178,9 +197,13 @@ function button1HoverCheck(x , y) {
 function mousemovefunc(e) {
     armCursor.style.top = e.clientY -15 + "px";
     armCursor.style.left = e.clientX -15 + "px";
+
+    g_xcursor = e.clientX;
+    g_ycursor = e.clientY;
+
     addHistory(e.clientX, e.clientY);
 
-    console.log (e.clientX, " ", e.clientY);
+   // console.log (e.clientX, " ", e.clientY);
     var insidebutton0 = button0HoverCheck(e.clientX, e.clientY);
     var insidebutton1 = button1HoverCheck(e.clientX, e.clientY);
 

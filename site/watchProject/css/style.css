@@ -71,8 +71,11 @@ p {
 }
 
 body>div {
- width: 628px;
- height:356px;
+ /*width: 628px;
+ height:356px;*/
+ width: 640px;
+ height:360px;
+ 
  background-color:grey;
  color: white;
  /*text-align: center;*/
@@ -89,7 +92,23 @@ body>div {
 
  
 
+
+
 }
+
+html { 
+    width: 100%; 
+    min-height: 100%; 
+} 
+ 
+body { 
+    width: 1920px; 
+    height: 1080px;
+    min-height: inherit; 
+    margin: 0; 
+    padding: 0; 
+} 
+
 /*
 h1 {
  width: 50%;

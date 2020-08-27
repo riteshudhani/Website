@@ -16,7 +16,8 @@
     border-radius: 30px;
     position: absolute;
     /*background-color: #d00d4fd6;*/
-    background-color: #d00d4f4f;
+    /*background-color: #d00d4f4f;*/
+    background-color: #000d4f56;
     /*z-index: 10000000;*/
     z-index: 100;
 }
@@ -33,8 +34,22 @@
     top: 15px;
 }
 
+.markerDot {
+    position: absolute;
+    /* background-color: #2196f3b8; */
+    background-color: white;
+    z-index: 10000000;
+    /*border-radius: 30px;*/
+    width: 2px; 
+    height: 2px; 
+    left: 14px; 
+    top: 14px;
+}
+
 
 * { 
-        cursor: none; 
+        /*cursor: none; */
         box-sizing: border-box;
+
+
     } 

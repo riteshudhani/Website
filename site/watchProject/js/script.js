@@ -12,8 +12,8 @@ function docLoadedFunc()
 //Initial condition start
 
 //position of circle shaped button from top left
-//var offsets = [256, 144];  //16:9 increments. default 320,180
-var offsets = [256, 147];  //16:9 increments. default 534:942
+var offsets = [256, 144];  //16:9 increments. default 320,180
+//var offsets = [256, 147];  //16:9 increments. default 534:942
 
 //Calculate distances on a screen of resolution 1920x1080
 var distances = [];
@@ -21,9 +21,14 @@ var distances = [];
 //distances[1] = 540 - offsets[1];
 //distances[2] = 960 - offsets[0];
 
-distances[0] = Math.sqrt(Math.pow(950 - offsets[0], 2) + Math.pow(542 - offsets[1], 2));
-distances[1] = 542 - offsets[1];
-distances[2] = 950 - offsets[0];
+//distances[0] = Math.sqrt(Math.pow(950 - offsets[0], 2) + Math.pow(542 - offsets[1], 2));
+//distances[1] = 542 - offsets[1];
+//distances[2] = 950 - offsets[0];
+
+
+distances[0] = Math.sqrt(Math.pow(960 - offsets[0], 2) + Math.pow(540 - offsets[1], 2));
+distances[1] = 540 - offsets[1];
+distances[2] = 960 - offsets[0];
 
 var difficultyLevel=2;
 var zoneNumber = 1;
@@ -69,8 +74,15 @@ var buttonSize = 0;
 
 var clickCount = 0;
 
+var buttonTimeout = 0;
+var objectNameFocussed = null;
 
+function clickFunc(){
+	
 
+	//if()
+	simulate(objectNameFocussed, "click");
+}
 
 function changeColorEntera(event){
 	Button1.style.backgroundColor = "red";
@@ -81,6 +93,10 @@ function changeColorEntera(event){
 
 	Button1.overState = "over";
 
+	objectNameFocussed = Button1;
+
+	buttonTimeout = setTimeout(clickFunc, 800);
+
 };
 
 function changeColorLeavea(event){
@@ -89,64 +105,20 @@ function changeColorLeavea(event){
 	//document.getElementById("2").appendChild(Button1);
 
 	Button1.overState = "out";
+	clearTimeout(buttonTimeout);
+	objectNameFocussed = null;
 };
 
 function changeColorClicka(event){
 
-	Button1.style.backgroundColor = "white";
-	Button1.style.opacity = 0.5;
-	document.getElementById("button0").style.opacity = 1.0;
-	console.log(Button1.style.backgroundColor);
-	Button1.removeEventListener("mouseenter",changeColorEntera);
-	Button1.removeEventListener("mouseleave",changeColorLeavea);
-	Button1.removeEventListener("click",changeColorClicka);
 
-	//for simulator
-	Button1.removeEventListener("mouseover",changeColorEntera);
-	Button1.removeEventListener("mouseout",changeColorLeavea);
-	//for simulator ends
-
-	button0.addEventListener("mouseenter",changeColorEnter);
-	button0.addEventListener("mouseleave",changeColorLeave);
-	button0.addEventListener("click",changeColorClick);
-
-	//for simulator
-	button0.addEventListener("mouseover",changeColorEnter);
-	button0.addEventListener("mouseout",changeColorLeave);
-	//for sumulator
-	
-}
-
-
-function changeColorEnter(event){
-	button0.style.backgroundColor = "red";
-	console.log(button0.style.backgroundColor);
-	//Button1.remove();
-	//Button1.remove
-
-	button0.overState = "over";
-};
-
-function changeColorLeave(event){
-	//document.getElementById("button0").style.backgroundColor = "white";
-	button0.style.backgroundColor = "white";
-	//console.log(document.getElementById("button0").style.backgroundColor);
-	console.log(button0.style.backgroundColor);
-	//document.getElementById("2").appendChild(Button1);
-
-	button0.overState = "out";
-};
-
-
-function changeColorClick(event){
-	//document.getElementById("button0").style.backgroundColor = "grey";
-	//console.log(document.getElementById("button0").style.backgroundColor);
 
 	var x_offset =0, y_offset =0;
 
 	clickCount++;
+	console.log(clickCount);
 
-	if(clickCount >5 && clickCount % 5 == 1)
+	if(( clickCount % 5 == 0))
 	{
 		document.getElementById(zoneNumber.toString()).removeChild(Button1);
 
@@ -179,50 +151,50 @@ function changeColorClick(event){
 
 				case 2:
 				    buttonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
-				    //x_offset = (1920/6) - buttonSize/2 + "px";
-				    x_offset = (1884/6) - buttonSize/2 + "px";
+				    x_offset = (1920/6) - buttonSize/2 + "px";
+				    //x_offset = (1884/6) - buttonSize/2 + "px";
 				    y_offset = offsets[1] - buttonSize/2 + "px";
 					break;
 
 				case 3:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
-				    //x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
-				    x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
 				    y_offset = offsets[1] - buttonSize/2 + "px";
 					break;				
 				case 4:
 				    buttonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
-				    //x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
-				    x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
-				    //y_offset = (1080/6) - buttonSize/2 + "px";
-				    y_offset = (1068/6) - buttonSize/2 + "px";
+				    x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    y_offset = (1080/6) - buttonSize/2 + "px";
+				    //y_offset = (1068/6) - buttonSize/2 + "px";
 					break;
 				case 5:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
-				    //x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
-				    x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
-				    //y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
-				    y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+				    x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 					break;
 				case 6:
 				    buttonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
-				    //x_offset = (1920/6) - buttonSize/2 + "px";
-				    //y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
+				    x_offset = (1920/6) - buttonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
 
-				    x_offset = (1884/6) - buttonSize/2 + "px";
-				    y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+				    //x_offset = (1884/6) - buttonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 					break;
 				case 7:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
 				    x_offset = offsets[0] - buttonSize/2 + "px";
-				    //y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
-				    y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 					break;
 				case 8:
 				    buttonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
 				    x_offset = offsets[0] - buttonSize/2 + "px";
-				    //y_offset = (1080/6) - buttonSize/2 + "px";
-				    y_offset = (1068/6) - buttonSize/2 + "px";
+				    y_offset = (1080/6) - buttonSize/2 + "px";
+				    //y_offset = (1068/6) - buttonSize/2 + "px";
 					break;
 				default:
 					console.log("Error case");
@@ -239,7 +211,8 @@ function changeColorClick(event){
 
 		Button1.style.left = x_offset;
 		Button1.style.top = y_offset;
-		button0.style.marginTop = (356-buttonSize)/2 + "px";
+		//button0.style.marginTop = (356-buttonSize)/2 + "px";
+		button0.style.marginTop = (360-buttonSize)/2 + "px";
 
 		//document.getElementById("button0").style.width = button0Size[difficultyLevel-3] + "px";
 		//document.getElementById("button0").style.height = button0Size[difficultyLevel-3] +"px";
@@ -249,20 +222,76 @@ function changeColorClick(event){
 		document.getElementById(zoneNumber.toString()).appendChild(Button1);
 
 	}
+
+	Button1.style.backgroundColor = "white";
+	Button1.style.opacity = 0.5;
+	document.getElementById("button0").style.opacity = 1.0;
+	console.log(Button1.style.backgroundColor);
+	//Button1.removeEventListener("mouseenter",changeColorEntera);
+	//Button1.removeEventListener("mouseleave",changeColorLeavea);
+	Button1.removeEventListener("click",changeColorClicka);
+
+	//for simulator
+	Button1.removeEventListener("mouseover",changeColorEntera);
+	Button1.removeEventListener("mouseout",changeColorLeavea);
+	//for simulator ends
+
+	//button0.addEventListener("mouseenter",changeColorEnter);
+	//button0.addEventListener("mouseleave",changeColorLeave);
+	button0.addEventListener("click",changeColorClick);
+
+	//for simulator
+	button0.addEventListener("mouseover",changeColorEnter);
+	button0.addEventListener("mouseout",changeColorLeave);
+	//for sumulator
+	
+}
+
+
+function changeColorEnter(event){
+	button0.style.backgroundColor = "red";
+	console.log(button0.style.backgroundColor);
+	//Button1.remove();
+	//Button1.remove
+
+	objectNameFocussed = button0;
+
+	buttonTimeout = setTimeout(clickFunc, 800);
+	button0.overState = "over";
+};
+
+function changeColorLeave(event){
+	//document.getElementById("button0").style.backgroundColor = "white";
 	button0.style.backgroundColor = "white";
-	button0.removeEventListener("mouseenter",changeColorEnter);
-	button0.removeEventListener("mouseleave",changeColorLeave);
+	//console.log(document.getElementById("button0").style.backgroundColor);
+	console.log(button0.style.backgroundColor);
+	//document.getElementById("2").appendChild(Button1);
+
+	button0.overState = "out";
+	objectNameFocussed = null;
+
+	clearTimeout(buttonTimeout);
+};
+
+
+function changeColorClick(event){
+	//document.getElementById("button0").style.backgroundColor = "grey";
+	//console.log(document.getElementById("button0").style.backgroundColor);
+
+	button0.style.backgroundColor = "white";
+	//button0.removeEventListener("mouseenter",changeColorEnter);
+	//button0.removeEventListener("mouseleave",changeColorLeave);
 	button0.removeEventListener("click",changeColorClick);
 	
 	//for simulator
-	button0.removeEventListener("mouseover",changeColorEntera);
-	button0.removeEventListener("mouseout",changeColorLeavea);
+	button0.removeEventListener("mouseover",changeColorEnter);
+	button0.removeEventListener("mouseout",changeColorLeave);
 	//for simulator ends
 
 	Button1.style.opacity = 1.0;
 	button0.style.opacity = 0.5;
-	Button1.addEventListener("mouseenter",changeColorEntera);
-	Button1.addEventListener("mouseleave",changeColorLeavea);
+	//Button1.addEventListener("mouseenter",changeColorEntera);
+	//Button1.addEventListener("mouseleave",changeColorLeavea);
 	Button1.addEventListener("click",changeColorClicka);
 
 	//for simulator
