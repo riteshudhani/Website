@@ -7,7 +7,7 @@
     width: 100px;
     height: 50px;
     cursor: pointer;
-    z-index: 10000000;
+    z-index: 1000000;
 }
 
 #arm-cursor {
@@ -18,7 +18,7 @@
     /*background-color: #d00d4fd6;*/
     /*background-color: #d00d4f4f;*/
     background-color: #000d4f56;
-    /*z-index: 10000000;*/
+    z-index: 10000000;
     z-index: 100;
 }
 
