@@ -9,6 +9,8 @@
 function docLoadedFunc()
 {
 
+//var g_azimuth_lr, g_azimuth_ll, g_azimuth_ur, g_azimuth_ul, g_inclination_lr, g_inclination_ll, g_inclination_ur, g_inclination_ul, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination;
+var g_min_azimuth, g_max_azimuth, g_min_inclination, g_max_inclination;
 //Initial condition start
 
 //position of circle shaped button from top left
@@ -25,20 +27,143 @@ var distances = [];
 //distances[1] = 542 - offsets[1];
 //distances[2] = 950 - offsets[0];
 
-
 distances[0] = Math.sqrt(Math.pow(960 - offsets[0], 2) + Math.pow(540 - offsets[1], 2));
 distances[1] = 540 - offsets[1];
 distances[2] = 960 - offsets[0];
 
+
 var difficultyLevel=2;
 var zoneNumber = 1;
+var zonePrev;
+
+var IDForFileName = difficultyLevel;
+
+var indexofdifvv = localStorage.getItem("indexofdif");
+var participantIDvv = localStorage.getItem("participantID");
+var posturevv = localStorage.getItem("posture");
+var levelvv = localStorage.getItem("level");
+
+if(indexofdifvv != undefined && indexofdifvv != null) {
+	difficultyLevel = indexofdifvv;
+	IDForFileName = difficultyLevel;
+}
+
+if(levelvv != undefined && levelvv != null) {
+	zoneNumber = levelvv;
+}
+
+console.log("Values received in calibration page", "ParticipantID ", participantIDvv, "PostureID ", posturevv, "ID value ", indexofdifvv, "Zone value ", levelvv);
+
+var firstButtonSize =0;
+var x_offset =0, y_offset =0;
+
+var targetX = 0, targetY=0;
+var buttonSize = 0;
+
+
+
+
+firstSizeCalculator();
+
+function firstSizeCalculator() {
+
+			switch (Number(zoneNumber)) {
+				case 1:
+				    firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = offsets[0] - firstButtonSize/2 + "px";
+				    y_offset = offsets[1] - firstButtonSize/2 + "px";
+				    
+				    targetX= offsets[0];
+					targetY= offsets[1];
+					break;
+
+				case 2:
+				    firstButtonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = (1920/6) - firstButtonSize/2 + "px";
+				    //x_offset = (1884/6) - buttonSize/2 + "px";
+				    y_offset = offsets[1] - firstButtonSize/2 + "px";
+
+				    targetX= 940;
+					targetY= offsets[1];
+					break;
+
+				case 3:
+				    firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = (1920/3) - offsets[0] - firstButtonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    y_offset = offsets[1] - firstButtonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= offsets[1];
+					break;				
+				case 4:
+				    firstButtonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = (1920/3) - offsets[0] - firstButtonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    y_offset = (1080/6) - firstButtonSize/2 + "px";
+				    //y_offset = (1068/6) - buttonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= 540;
+					break;
+				case 5:
+				    firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = (1920/3) - offsets[0] - firstButtonSize/2 + "px";
+				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - firstButtonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= 540 - offsets[1];
+					break;
+				case 6:
+				    firstButtonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = (1920/6) - firstButtonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - firstButtonSize/2 + "px";
+
+				    //x_offset = (1884/6) - buttonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+
+				    targetX= 960;
+					targetY= 540 - offsets[1];
+					break;
+				case 7:
+				    firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = offsets[0] - firstButtonSize/2 + "px";
+				    y_offset = (1080/3) - offsets[1] - firstButtonSize/2 + "px";
+				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+
+				    targetX= offset[0];
+					targetY= 540 - offsets[1];
+					break;
+				case 8:
+				    firstButtonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
+				    x_offset = offsets[0] - firstButtonSize/2 + "px";
+				    y_offset = (1080/6) - firstButtonSize/2 + "px";
+				    //y_offset = (1068/6) - buttonSize/2 + "px";
+				    
+				    targetX= offsets[0];
+					targetY= 540;
+					break;
+				default:
+					console.log("Error case");
+				 break;
+
+			};
+		}
+
+
+document.getElementById("difficulty").innerHTML = "ID = " + difficultyLevel;
+
 
 //Calculate button size for initialization
-var firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
+//var firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
 console.log(firstButtonSize);
+buttonSize = firstButtonSize;
 
 var Button1 = document.createElement('div');
-Button1.class ="button";
+Button1.class ="button" + "calibrationoff";
+//Button1.class = "calibrationoff";
 Button1.ID ="button1";
 Button1.style.width = firstButtonSize + "px";
 Button1.style.height = firstButtonSize + "px";
@@ -46,6 +171,8 @@ Button1.style.borderRadius =firstButtonSize + "px";
 Button1.style.border = "0px solid black";
 Button1.style.backgroundColor = "white";
 Button1.style.padding = "0px";
+Button1.style.opacity = "0.1";
+//Button1.style.display = "none";
 //Button1.style.margin = "0px";
 
 //Button1.style.marginLeft = "auto";
@@ -53,9 +180,16 @@ Button1.style.padding = "0px";
 //Button1.style.marginTop = centerPoint1 +"px";
 Button1.style.outline = "none";
 Button1.style.position = "absolute";
-Button1.style.left = offsets[0] - firstButtonSize/2 + "px";
-Button1.style.top = offsets[1]- firstButtonSize/2 + "px";
-document.getElementById(zoneNumber.toString()).appendChild(Button1);
+//Button1.style.left = offsets[0] - firstButtonSize/2 + "px";
+//Button1.style.top = offsets[1]- firstButtonSize/2 + "px";
+
+Button1.style.left = x_offset;
+Button1.style.top = y_offset;
+
+
+//document.getElementById(zoneNumber.toString()).appendChild(Button1);
+
+
 window.MyButton1 = Button1;
 
 var button0 = document.getElementById("button0");
@@ -69,13 +203,25 @@ button0.overState = "out";
 Button1.overState = "out";
 //Initial condition over
 
-var buttonSize = 0;
+
 //var buttonSize = (Math.pow(2,difficultyLevel) -1);
 
 var clickCount = 0;
+var clickCountHomeTar =0;
+var recordingEvents = false;
+var startRecordingTime = 0;
+// window.recordingEvents = recordingEvents;
+// window.startRecordingTime = startRecordingTime;
+// window.clickCounter = clickCount;
+// window.clickCountHomeTar =clickCountHomeTar;
+
+var clickCountLocal =0;
+var clickCountHomeTarLocal =0;
+var recordingEventsLocal = false;
 
 var buttonTimeout = 0;
 var objectNameFocussed = null;
+
 
 function clickFunc(){
 	
@@ -84,9 +230,126 @@ function clickFunc(){
 	simulate(objectNameFocussed, "click");
 }
 
+
+window.addHistory = function (x, y, az, inclination, insidestatus, clickflag){
+   // if (cursorHistory.length == 80){
+    //  if (cursorHistory.length == 5){
+    //     cursorHistory.shift();
+    // }
+    var clickOccuredTrueTarget = false;
+    var clickOccuredHomeTarget = false;
+
+    if(recordingEvents && !recordingEventsLocal)
+    {
+        recordingEventsLocal = recordingEvents;
+    }
+    
+     if(clickCountLocal != clickCount)
+     {
+         clickOccuredTrueTarget = true;
+         clickCountLocal++;
+         if(clickCountLocal != clickCount)
+         {
+             console.log("Error: click count not same ",clickCountLocal, clickCount);
+             return;
+         }
+        // console.log(cursorHistory);
+     }
+
+
+
+     if(clickCountHomeTarLocal != clickCountHomeTar)
+     {
+         clickOccuredHomeTarget = true;
+         clickCountHomeTarLocal++;
+         if(clickCountHomeTarLocal != clickCountHomeTar)
+         {
+             console.log("Error: click count not same");
+             return;
+         }
+         //console.log(cursorHistory);
+     }
+
+    if(recordingEvents || recordingEvents!=recordingEventsLocal)
+    {
+    	var date = new Date();
+        var currentTime = date.getTime();
+        //console.log("currentTime ", currentTime);
+        //var cur = Date.parse(currentTime);
+      //  var stime = Date.parse(startRecordingTime)
+        currentTime = currentTime - startRecordingTime;
+        //console.log("currentTime ", currentTime);
+        if(!clickOccuredHomeTarget && !clickOccuredTrueTarget)
+        {
+        	if(clickflag ==1)
+        	{
+        		//cursorHistory.push([currentTime, x, y, "BlankClick", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);	
+        		cursorHistory.push([currentTime, x, y, "BlankClick", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);	
+        	}
+        	else{
+            //cursorHistory.push([currentTime, x, y, "Move", localStorage.getItem("level"), localStorage.getItem("indexofdif"), localStorage.getItem("posture"), localStorage.getItem("participantID"), zoneCoordinateX, zoneCoordinateY, 960, 540, buttonSize, az, inclination ]);
+            	//cursorHistory.push([currentTime, x, y, "Move", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus , g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);
+            	cursorHistory.push([currentTime, x, y, "Move", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus , g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
+            }
+        }
+        else if(clickOccuredHomeTarget)
+        {
+            //cursorHistory.push([currentTime, x, y, "HomeClick" , zoneNumber, difficultyLevel, posturevv , participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);
+            cursorHistory.push([currentTime, x, y, "HomeClick" , zoneNumber, difficultyLevel, posturevv , participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
+        }
+        else if(clickOccuredTrueTarget)
+        {
+            cursorHistory.push([currentTime, x, y, "TrueClick" , zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540,  buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);  
+            //cursorHistory.push([currentTime, x, y, "TrueClick" , zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540,  buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);  
+        }
+        else
+        {
+        	console.log("Error");
+        }
+
+        if(recordingEvents!=recordingEventsLocal)
+        {
+            recordingEventsLocal = false;
+            //dump();
+            var text = "";
+
+            function addLineEndFunction(value)
+			{
+				text += value + "\n";
+			}
+
+			
+            cursorHistory.forEach(addLineEndFunction);
+            var filename = "ParticipantID_" + participantIDvv + "_PostureID_"+ posturevv + "_ID_"+ IDForFileName + "_zone_" + zoneNumber + ".csv";
+
+            IDForFileName = difficultyLevel;
+
+            //var filename = "readme.txt";
+			
+			var blob = new Blob([text], {type:'text/plain'});
+			var link = document.createElement("a");
+			link.download = filename;
+			//link.innerHTML = "Download File";
+			link.href = window.URL.createObjectURL(blob);
+			document.body.appendChild(link);
+			//link.style.float = "right";
+			link.click();
+
+
+			switchToNextZone();
+
+			cursorHistory = [];
+        }
+    }
+    
+}
+
+
+
+
 function changeColorEntera(event){
-	Button1.style.backgroundColor = "red";
-	console.log(Button1.style.backgroundColor);
+	Button1.style.backgroundColor = "yellow";
+	//console.log(Button1.style.backgroundColor);
 	//Button1.remove();
 	//Button1.remove
 	Button1.title = "x_offset y_offset";
@@ -95,58 +358,60 @@ function changeColorEntera(event){
 
 	objectNameFocussed = Button1;
 
-	buttonTimeout = setTimeout(clickFunc, 800);
+	//buttonTimeout = setTimeout(clickFunc, 800);
 
 };
 
 function changeColorLeavea(event){
-	Button1.style.backgroundColor = "white";
-	console.log(Button1.style.backgroundColor);
+	Button1.style.backgroundColor = "green";
+	//console.log(Button1.style.backgroundColor);
 	//document.getElementById("2").appendChild(Button1);
 
 	Button1.overState = "out";
-	clearTimeout(buttonTimeout);
+	//clearTimeout(buttonTimeout);
 	objectNameFocussed = null;
 };
 
-function changeColorClicka(event){
-
-
-
+function switchToNextZone(){
 	var x_offset =0, y_offset =0;
-
-	clickCount++;
-	console.log(clickCount);
 
 	if(( clickCount % 5 == 0))
 	{
 		document.getElementById(zoneNumber.toString()).removeChild(Button1);
 
+		zonePrev = zoneNumber;
 		zoneNumber++;
 
 		if(zoneNumber == 9)
 		{
 			zoneNumber = 1;
-
+			
 			difficultyLevel++;
 
 			if(difficultyLevel ==6)
 			{
 				alert("Study for the given posture is completed. Switch to the next posture. Thanks! ");
 				clearInterval(fiveMinTimer);
-				difficultyLevel = 1;
+				difficultyLevel = 2;
 			}
 
-			
+			localStorage.setItem("indexofdif", difficultyLevel);
+
+			console.log("ID set = ", difficultyLevel);
 
 			document.getElementById("difficulty").innerHTML = "ID = " + difficultyLevel;
 		}
+		localStorage.setItem("level", zoneNumber);
+		console.log("Zone set= ", zoneNumber);
 
 		switch (zoneNumber) {
 				case 1:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
 				    x_offset = offsets[0] - buttonSize/2 + "px";
 				    y_offset = offsets[1] - buttonSize/2 + "px";
+
+				    targetX= offsets[0];
+					targetY= offsets[1];
 					break;
 
 				case 2:
@@ -154,6 +419,9 @@ function changeColorClicka(event){
 				    x_offset = (1920/6) - buttonSize/2 + "px";
 				    //x_offset = (1884/6) - buttonSize/2 + "px";
 				    y_offset = offsets[1] - buttonSize/2 + "px";
+
+				    targetX= 940;
+					targetY= offsets[1];
 					break;
 
 				case 3:
@@ -161,6 +429,9 @@ function changeColorClicka(event){
 				    x_offset = (1920/3) - offsets[0] - buttonSize/2 + "px";
 				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
 				    y_offset = offsets[1] - buttonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= offsets[1];
 					break;				
 				case 4:
 				    buttonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
@@ -168,6 +439,9 @@ function changeColorClicka(event){
 				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
 				    y_offset = (1080/6) - buttonSize/2 + "px";
 				    //y_offset = (1068/6) - buttonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= 540;
 					break;
 				case 5:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
@@ -175,6 +449,9 @@ function changeColorClicka(event){
 				    //x_offset = (1884/3) - offsets[0] - buttonSize/2 + "px";
 				    y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+
+				    targetX= 1920 - offsets[0];
+					targetY= 540 - offsets[1];
 					break;
 				case 6:
 				    buttonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
@@ -183,18 +460,26 @@ function changeColorClicka(event){
 
 				    //x_offset = (1884/6) - buttonSize/2 + "px";
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+				    targetX= 960;
+					targetY= 540 - offsets[1];
 					break;
 				case 7:
 				    buttonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
 				    x_offset = offsets[0] - buttonSize/2 + "px";
 				    y_offset = (1080/3) - offsets[1] - buttonSize/2 + "px";
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
+
+				    targetX= offsets[0];
+					targetY= 540 - offsets[1];
 					break;
 				case 8:
 				    buttonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
 				    x_offset = offsets[0] - buttonSize/2 + "px";
 				    y_offset = (1080/6) - buttonSize/2 + "px";
 				    //y_offset = (1068/6) - buttonSize/2 + "px";
+
+				    targetX= offsets[0];
+					targetY= 540;
 					break;
 				default:
 					console.log("Error case");
@@ -221,12 +506,26 @@ function changeColorClicka(event){
         //Button1.style.marginTop = centerPoint1 +"px";
 		document.getElementById(zoneNumber.toString()).appendChild(Button1);
 
+
 	}
 
+}
+
+function changeColorClicka(event){
+
+	
+
+	clickCount++;
+	//console.log(clickCount);
+	if(( clickCount % 5 == 0)){
+		recordingEvents = false;
+	}
+
+	button0.style.backgroundColor = "green";
 	Button1.style.backgroundColor = "white";
-	Button1.style.opacity = 0.5;
+	Button1.style.opacity = 0.1;
 	document.getElementById("button0").style.opacity = 1.0;
-	console.log(Button1.style.backgroundColor);
+//	console.log(Button1.style.backgroundColor);
 	//Button1.removeEventListener("mouseenter",changeColorEntera);
 	//Button1.removeEventListener("mouseleave",changeColorLeavea);
 	Button1.removeEventListener("click",changeColorClicka);
@@ -248,29 +547,57 @@ function changeColorClicka(event){
 }
 
 
+// window.transferCalibrationValues = function (azimuth_lr, azimuth_ll, azimuth_ur, azimuth_ul, inclination_lr, inclination_ll, inclination_ur, inclination_ul, min_azimuth, min_inclination, max_azimuth, max_inclination) {
+
+
+// 	g_azimuth_lr = azimuth_lr;
+// 	g_azimuth_ll = azimuth_ll;
+// 	g_azimuth_ur = azimuth_ur;
+// 	g_azimuth_ul = azimuth_ul;
+// 	g_inclination_lr = inclination_lr;
+// 	g_inclination_ll = inclination_ll;
+// 	g_inclination_ur = inclination_ur;
+// 	g_inclination_ul = inclination_ul;
+// 	g_min_azimuth = min_azimuth;
+// 	g_min_inclination = min_inclination;
+// 	g_max_azimuth = max_azimuth;
+// 	g_max_inclination = max_inclination;
+// }
+
+window.transferCalibrationValues = function (azimuth_max, azimuth_min, inclination_max, inclination_min) {
+	
+
+	g_max_azimuth = azimuth_max;
+	g_min_azimuth = azimuth_min;
+	
+	g_max_inclination = inclination_max;
+	g_min_inclination = inclination_min;
+	
+}
+
 function changeColorEnter(event){
-	button0.style.backgroundColor = "red";
-	console.log(button0.style.backgroundColor);
+	button0.style.backgroundColor = "yellow";
+	//console.log(button0.style.backgroundColor);
 	//Button1.remove();
 	//Button1.remove
 
 	objectNameFocussed = button0;
 
-	buttonTimeout = setTimeout(clickFunc, 800);
+	//buttonTimeout = setTimeout(clickFunc, 800);
 	button0.overState = "over";
 };
 
 function changeColorLeave(event){
 	//document.getElementById("button0").style.backgroundColor = "white";
-	button0.style.backgroundColor = "white";
+	button0.style.backgroundColor = "green";
 	//console.log(document.getElementById("button0").style.backgroundColor);
-	console.log(button0.style.backgroundColor);
+//	console.log(button0.style.backgroundColor);
 	//document.getElementById("2").appendChild(Button1);
 
 	button0.overState = "out";
 	objectNameFocussed = null;
 
-	clearTimeout(buttonTimeout);
+	//clearTimeout(buttonTimeout);
 };
 
 
@@ -279,6 +606,7 @@ function changeColorClick(event){
 	//console.log(document.getElementById("button0").style.backgroundColor);
 
 	button0.style.backgroundColor = "white";
+	Button1.style.backgroundColor = "green";
 	//button0.removeEventListener("mouseenter",changeColorEnter);
 	//button0.removeEventListener("mouseleave",changeColorLeave);
 	button0.removeEventListener("click",changeColorClick);
@@ -289,7 +617,7 @@ function changeColorClick(event){
 	//for simulator ends
 
 	Button1.style.opacity = 1.0;
-	button0.style.opacity = 0.5;
+	button0.style.opacity = 0.1;
 	//Button1.addEventListener("mouseenter",changeColorEntera);
 	//Button1.addEventListener("mouseleave",changeColorLeavea);
 	Button1.addEventListener("click",changeColorClicka);
@@ -298,6 +626,20 @@ function changeColorClick(event){
 	Button1.addEventListener("mouseover",changeColorEntera);
 	Button1.addEventListener("mouseout",changeColorLeavea);
 	//for simulator ends
+
+	clickCountHomeTar++;
+
+	if(clickCountHomeTar % 5 ==1)
+	{
+		recordingEvents = true;
+		var date = new Date();
+		startRecordingTime = date.getTime();
+		console.log("startRecordingTime",startRecordingTime)
+
+//     	cursorHistory.push(["currentTime", "x", "y", "Event", "Zone", "ID", "Posture ID", "Participant ID",  "TrueTargetX", "TrueTargetY", "HomeTargetX", "HomeTargetY","TargetDiameter", "Azimuth", "Elevation", "Ontarget", "min_azimuth", "min_inclination", "max_azimuth", "max_inclination", "azimuth_lr", "inclination_lr", "azimuth_ll", "inclination_ll", "azimuth_ur", "inclination_ur", "azimuth_ul", "inclination_ul"]);
+     	cursorHistory.push(["currentTime", "x", "y", "Event", "Zone", "ID", "Posture ID", "Participant ID",  "TrueTargetX", "TrueTargetY", "HomeTargetX", "HomeTargetY","TargetDiameter", "Azimuth", "Elevation", "Ontarget", "min_azimuth", "min_inclination", "max_azimuth", "max_inclination"]);
+    
+	}
 
 
 };
@@ -317,11 +659,11 @@ document.getElementById("button0").addEventListener("mouseout",changeColorLeave)
 //Button1.addEventListener("mouseleave",changeColorLeavea);
 
 //for simulator
-Button1.addEventListener("mouseover",changeColorEntera);
-Button1.addEventListener("mouseout",changeColorLeavea);
+//Button1.addEventListener("mouseover",changeColorEntera);
+//Button1.addEventListener("mouseout",changeColorLeavea);
 //for simulator ends
 
-Button1.addEventListener("click",changeColorClicka);
+//Button1.addEventListener("click",changeColorClicka);
 
 /*
 window.button1HoverCheck =  function (x , y) {

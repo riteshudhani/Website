@@ -49,7 +49,7 @@
 		    <option value="3">3</option>
 		    <option value="4">4</option>
 		    <option value="5">5</option>
-		  </select> <span class="formTitles">(Keep at 2, unless recalibrating) </span><br><br>
+		  </select> <span class="formTitles">(Leave default, unless recalibrating) </span><br><br>
 
 		  <label for="level" class="formTitles">Choose level :</label>
 		  <select id="level" name="level">
@@ -61,14 +61,14 @@
 		    <option value="6">6</option>
 		    <option value="7">7</option>
 		    <option value="8">8</option>
-		  </select> <span class="formTitles">(Keep at 1, unless recalibrating) </span> <br><br>
+		  </select> <span class="formTitles">(Leave default, unless recalibrating) </span> <br><br>
 
-		  <form> 
-			  	<!--<input type="checkbox" id="recalibrate" name="recalibrate" value="true"> -->
-			  	<!--<label for="recalibrate" class="formTitles"> Recalibrate the watch sensor</label><br><br><br> -->
-		  </form> 
+		  <form>
+			  	<input type="checkbox" id="recalibrate" name="recalibrate" value="false">
+			  	<label for="recalibrate" class="formTitles"> Recalibrate</label><br><br><br>
+		  </form>
 		  
-		  <input type="submit" class="formTitles" id="formSubmission">
+		  <input type="submit" class="formTitles">
 		</form>
 
 		
@@ -83,7 +83,7 @@
 	<div id="6">6</div>
 	<div id="5">5</div>
 
-	<script src="js/formEvaluation.js"></script>
+		
 	
 	<!-- Use webworker to run any scruipt in the background-->
 	<!-- Use opacity property of css to hide a button or use rgba-->

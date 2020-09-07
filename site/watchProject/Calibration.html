@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Ritesh Udhani">
+	<meta name="description" content="Page created to conduct a study">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Spherical coordinate testing</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/cursor.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="js/eventSimulator.js"></script>
+	<!-- <script src="js/d3.v5.min.js"></script> -->
+	
+</head>
+<body style="padding: 0px;">
+	
+	<div id="1">	</div>
+	<div id="2">	
+		<h2 class="calibrationon" style="text-align: center;color: black;">Steps for Calibration</h2>
+		<p class="calibrationon"> 1. Click connect button on the left in yellow with a mouse device to pair the smartwatch and the system</p>
+		<p class="calibrationon"> 2. Anchor your elbow as per the posture you are sitting in. </p> 
+		<p class="calibrationon"> 3. Hold your arm parallel to the ground and press the "Recalibrate" button on the smartwatch</p>
+
+
+		<!-- <p class="calibrationon"> 4. Far lower-right side calibration. </p>
+		<button id="lrCalibButton" class="calibrationon"> Mark Completed </button> <span id="lrcalibvalues" class="calibrationon"></span>
+		<p class="calibrationon"> 5. Far lower-left side calibration. </p>
+		<button id="llCalibButton" class="calibrationon"> Mark Completed </button> <span id="llcalibvalues" class="calibrationon"></span>-->
+
+		 <!-- <p class="calibrationon"> 4. Now move your arm to the far lower-right side. Once you cannot go any further low and right, click the "Mark Completed" button with a mouse. The azimuthal and inclination of the smartwatch is displayed in the lower-right block</p>
+		<button id="lrCalibButton" class="calibrationon"> Mark Completed </button>
+		<p class="calibrationon"> 5. Now move your arm to the far lower-left side. Once you cannot go any further low and left, click the "Mark Completed" button with a mouse. The azimuthal and inclination of the smartwatch is displayed in the lower-right block</p>
+		 -->
+		<p class="calibrationon"> 4. Inclination max. </p>
+		<button id="incMaxCalibButton" class="calibrationon"> Click to average </button> <span id="incMaxcalibvalues" class="calibrationon"></span> <button id="incMaxResetCalibButton" class="calibrationon" style="float:right">Reset </button> 
+		<p class="calibrationon"> 5. Inclination min. </p>
+		<button id="incMinCalibButton" class="calibrationon"> Click to average </button> <span id="incMincalibvalues" class="calibrationon"></span><button id="incMinResetCalibButton" class="calibrationon" style="float:right">Reset </button> 
+		
+
+
+	</div>
+
+
+
+	<div id="3">
+
+	  	<p style="float:right;" id="difficulty" class="calibrationoff"> ID = 2</p> <br>
+	  	<p style="clear: right; float:right;" class="calibrationoff"> Az = <span id="azimuth"></span></p> <br>
+	  	<p style="clear: right; float:right;" class="calibrationoff"> Inc =<span id="inclination"></span></p> <br>
+	  	
+	  	<p style="clear: right; float:right;" class="calibrationoff"><span id="azmin"></span></p> <br>
+	 <!--  	<p style="clear: right; float:right;" class="calibrationoff"> Az_max =<span id="azmax"></span></p> <br>
+	  	<p style="clear: right; float:right;" class="calibrationoff"> Inc_min =<span id="incmin"></span></p> <br>
+	  	<p style="clear: right; float:right;" class="calibrationoff"> Inc_max =<span id="incmax"></span></p> <br>
+	  --> 	<!--<p style="clear:right; float:right;" id="timer"> Time: 0 </p>
+	  	<p style="clear:right; float:right;" id="report">  </p> -->
+
+	</div>
+
+	<div id="8">	</div>
+	<div id="0">
+		
+		<div id="button0" class="button calibrationoff">  </div>	
+
+		<!-- <p class="calibrationon"> 6. Far upper-left side calibration.  </p>
+		<button id="ulCalibButton" class="calibrationon"> Mark Completed </button> <span id="ulcalibvalues" class="calibrationon"></span>
+		<p class="calibrationon"> 7. Far upper-right side calibration.  </p>
+		<button id="urCalibButton" class="calibrationon"> Mark Completed </button> <span id="urcalibvalues" class="calibrationon"></span>
+ -->
+
+		<p class="calibrationon"> 6. Azimuth max. </p>
+		<button id="azMaxCalibButton" class="calibrationon"> Click to average </button> <span id="azMaxcalibvalues" class="calibrationon"></span> <button id="azMaxResetCalibButton" class="calibrationon" style="float:right">Reset </button> 
+		<p class="calibrationon"> 7. Azimuth min. </p>
+		<button id="azMinCalibButton" class="calibrationon"> Click to average </button> <span id="azMincalibvalues" class="calibrationon"></span><button id="azMinResetCalibButton" class="calibrationon" style="float:right">Reset </button> 
+
+
+		<p class="calibrationon"> 8. Select start experiment below</p>
+		<button class="calibrationon" id="startExperiment" style="font-size: 130%"> Start experiment</button>
+	</div>
+	<div id="4">
+		<p class="calibrationon"  style="font-size: 120%; color: black;"> Current Azimuthal = <span id="curAzi"></span></p>
+		<p class="calibrationon" style="font-size: 120%; color: black;" > Current Inclination = <span id="curIncli"></span></p>
+		<p class="calibrationon" id="minmax1" style="color:black;">Azimuthal_min = undefined, Azimuthal_max = undefined, Inclination_min = undefined, Inclination_max = undefined </p><br>
+	</div>
+	<div id="7">    </div>
+	<div id="6">		</div>
+	<div style="position:relative;" id="5">	
+	<!--	<button id="pausebutton"> Pause </button>-->
+	</div>
+	
+	<script  src="js/script.js"></script>
+	<script  src="js/cursor.js"></script>
+	<!-- Use webworker to run any scruipt in the background-->
+	<!-- Use opacity property of css to hide a button or use rgba-->
+	<!--display:none property can be used to hide an element without recreating it. The element will no occupy space in DOM when hidden-->
+	<!--visibility:hidden; can also be used but it will continue to occupy the space in the DOM-->
+	<!--window.alert(); for alert message on windows.-->
+	<!--Use Number(Date()) method to count time elapsed-->
+</body>
+</html>
