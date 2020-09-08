@@ -114,7 +114,7 @@ function firstSizeCalculator() {
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 
 				    targetX= 1920 - offsets[0];
-					targetY= 540 - offsets[1];
+					targetY= 1080 - offsets[1];
 					break;
 				case 6:
 				    firstButtonSize = distances[1] / (Math.pow(2, difficultyLevel) -1);
@@ -125,7 +125,7 @@ function firstSizeCalculator() {
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 
 				    targetX= 960;
-					targetY= 540 - offsets[1];
+					targetY= 1080 - offsets[1];
 					break;
 				case 7:
 				    firstButtonSize = distances[0] / (Math.pow(2, difficultyLevel) -1);
@@ -134,7 +134,7 @@ function firstSizeCalculator() {
 				    //y_offset = (1068/3) - offsets[1] - buttonSize/2 + "px";
 
 				    targetX= offset[0];
-					targetY= 540 - offsets[1];
+					targetY= 1080 - offsets[1];
 					break;
 				case 8:
 				    firstButtonSize = distances[2] / (Math.pow(2, difficultyLevel) -1);
@@ -320,7 +320,7 @@ window.addHistory = function (x, y, az, inclination, insidestatus, clickflag){
 
 			
             cursorHistory.forEach(addLineEndFunction);
-            var filename = "ParticipantID_" + participantIDvv + "_PostureID_"+ posturevv + "_ID_"+ IDForFileName + "_zone_" + zoneNumber + ".csv";
+            var filename = "ParticipantID_" + participantIDvv + "_PostureID_"+ posturevv + "_ID_"+ difficultyLevel + "_zone_" + zoneNumber + ".csv";
 
             IDForFileName = difficultyLevel;
 
