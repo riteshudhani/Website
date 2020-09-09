@@ -420,32 +420,54 @@ var button1HoverCheck = function (x , y) {
 
 var button2HoverCheck = function (x ,y) {
 
+    var button2 = document.getElementById("button2");
+        
+    var totalWidth = (/*armCursor.offsetWidth  +*/ button2.offsetWidth )/2;
+    //var distance = Math.sqrt(Math.pow(x-950 ,2) + Math.pow(y-542,2));
+    var distance = Math.sqrt(Math.pow(x-690 ,2) + Math.pow(y-410,2));
     var inside = false;
-    if(x < 741 && x>640 && y<461 && y > 360)
-        inside  = true;
-
+    if(distance*100 < totalWidth*100){
+        inside =true;
+    }
+   // console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
+  
     return inside;
+
+    // var inside = false;
+    // if(x < 741 && x>640 && y<461 && y > 360)
+    //     inside  = true;
+
+    // return inside;
 }
  var switchPosition = false;
 
 var button3HoverCheck = function (x ,y) {
 
-   
+    var button3 = document.getElementById("button3");
+    var totalWidth = (/*armCursor.offsetWidth  +*/ button3.offsetWidth )/2;
+    var distance = Math.sqrt(Math.pow(x-button3.offsetWidth/2-button3.offsetLeft -button3.parentNode.offsetLeft,2) + Math.pow(y-button3.offsetWidth/2-button3.offsetTop -button3.parentNode.offsetTop,2));;
     var inside = false;
-    if(switchPosition) {
-        if(x < 741 && x>640 && y<721 && y > 620){
-            inside  = true;
-        }
+    if(distance*100 < totalWidth*100){
+        inside =true;
     }
-    else 
-    {
-        if ((x < 1281 && x>1180 && y<461 && y > 360)){
-            inside = true;
-        }
-    }
+   // console.log("totalWidth =", totalWidth, " distance =", distance, " inside =", inside);
+  
+    return inside;
+    // var inside = false;
+    // if(switchPosition) {
+    //     if(x < 741 && x>640 && y<721 && y > 620){
+    //         inside  = true;
+    //     }
+    // }
+    // else 
+    // {
+    //     if ((x < 1281 && x>1180 && y<461 && y > 360)){
+    //         inside = true;
+    //     }
+    // }
         
 
-    return inside;
+    // return inside;
 }
 
 window.switchPositionFunc = function (x){

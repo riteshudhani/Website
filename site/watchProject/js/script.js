@@ -292,22 +292,22 @@ window.addHistory = function (x, y, az, inclination, insidestatus, clickflag){
         	if(clickflag ==1)
         	{
         		//cursorHistory.push([currentTime, x, y, "BlankClick", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);	
-        		cursorHistory.push([currentTime, x, y, "BlankClick", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);	
+        		cursorHistory.push([date, currentTime, x, y, "BlankClick", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);	
         	}
         	else{
             //cursorHistory.push([currentTime, x, y, "Move", localStorage.getItem("level"), localStorage.getItem("indexofdif"), localStorage.getItem("posture"), localStorage.getItem("participantID"), zoneCoordinateX, zoneCoordinateY, 960, 540, buttonSize, az, inclination ]);
             	//cursorHistory.push([currentTime, x, y, "Move", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus , g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);
-            	cursorHistory.push([currentTime, x, y, "Move", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus , g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
+            	cursorHistory.push([date, currentTime, x, y, "Move", zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus , g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
             }
         }
         else if(clickOccuredHomeTarget)
         {
             //cursorHistory.push([currentTime, x, y, "HomeClick" , zoneNumber, difficultyLevel, posturevv , participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);
-            cursorHistory.push([currentTime, x, y, "HomeClick" , zoneNumber, difficultyLevel, posturevv , participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
+            cursorHistory.push([date, currentTime, x, y, "HomeClick" , zoneNumber, difficultyLevel, posturevv , participantIDvv, targetX, targetY, 960, 540, buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);
         }
         else if(clickOccuredTrueTarget)
         {
-            cursorHistory.push([currentTime, x, y, "TrueClick" , zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540,  buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);  
+            cursorHistory.push([date, currentTime, x, y, "TrueClick" , zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540,  buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination]);  
             //cursorHistory.push([currentTime, x, y, "TrueClick" , zoneNumber, difficultyLevel, posturevv, participantIDvv, targetX, targetY, 960, 540,  buttonSize, az, inclination, insidestatus, g_min_azimuth, g_min_inclination, g_max_azimuth, g_max_inclination, g_azimuth_lr, g_inclination_lr, g_azimuth_ll, g_inclination_ll, g_azimuth_ur, g_inclination_ur, g_azimuth_ul, g_inclination_ul]);  
         }
         else
@@ -645,7 +645,7 @@ function changeColorClick(event){
 		console.log("startRecordingTime",startRecordingTime)
 
 //     	cursorHistory.push(["currentTime", "x", "y", "Event", "Zone", "ID", "Posture ID", "Participant ID",  "TrueTargetX", "TrueTargetY", "HomeTargetX", "HomeTargetY","TargetDiameter", "Azimuth", "Elevation", "Ontarget", "min_azimuth", "min_inclination", "max_azimuth", "max_inclination", "azimuth_lr", "inclination_lr", "azimuth_ll", "inclination_ll", "azimuth_ur", "inclination_ur", "azimuth_ul", "inclination_ul"]);
-     	cursorHistory.push(["currentTime", "x", "y", "Event", "Zone", "ID", "Posture ID", "Participant ID",  "TrueTargetX", "TrueTargetY", "HomeTargetX", "HomeTargetY","TargetDiameter", "Azimuth", "Elevation", "Ontarget", "min_azimuth", "min_inclination", "max_azimuth", "max_inclination"]);
+     	cursorHistory.push(["currentTime","elapsedTime", "x", "y", "Event", "Zone", "ID", "Posture ID", "Participant ID",  "TrueTargetX", "TrueTargetY", "HomeTargetX", "HomeTargetY","TargetDiameter", "Azimuth", "Elevation", "Ontarget", "min_azimuth", "min_inclination", "max_azimuth", "max_inclination"]);
     
 	}
 
