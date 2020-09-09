@@ -6,6 +6,8 @@ window.g_xcursor = g_xcursor;
 window.g_ycursor = g_ycursor;
 
 var calibrationOn = true;
+var practiceOn = false;
+
 
 var WIDTH  = window.innerWidth,
 HEIGHT = window.innerHeight;
@@ -73,7 +75,7 @@ var clickPositionInsideTarget = false;
 window.clickPositionInsideTarget = clickPositionInsideTarget;
 
 function cursorClicked(e){
-    if(!calibrationOn)
+    if(!calibrationOn && !practiceOn)
     {
         
         var insidebutton0 = button0HoverCheck(g_xcursor + 15, g_ycursor +15);
@@ -101,6 +103,24 @@ function cursorClicked(e){
             addHistory(g_xcursor, g_ycursor,  g_azimuth, g_inclination, false, 1);
         }
     }
+    else if (practiceOn){
+            var button2 = document.getElementById("button2");
+            var button3 = document.getElementById("button3");
+            var insidebutton2 = button2HoverCheck(g_xcursor + 15, g_ycursor +15);
+            var insidebutton3 = button3HoverCheck(g_xcursor +15 , g_ycursor +15);
+
+            console.log("Inside =", insidebutton2, "over state =", button2.overState, g_xcursor, g_ycursor);
+
+            if (insidebutton2 && button2.overState === "over")
+            {
+                simulate(document.getElementById("button2"), "click");
+            }
+
+            if (insidebutton3 && button3.overState === "over")
+            {
+                simulate(button3, "click");
+            }            
+        }
     else {
             var button = document.getElementById("startExperiment");
             if(button)
@@ -172,9 +192,9 @@ function handleMessage(evt) {
     armCursor.style.top = y + "px";
     armCursor.style.left = x + "px";
 
-    console.log(g_xcursor, g_ycursor);
+   // console.log(g_xcursor, g_ycursor);
 
-    if(!calibrationOn)
+    if(!calibrationOn && !practiceOn)
     {
         
         
@@ -206,6 +226,38 @@ function handleMessage(evt) {
         {
             simulate(MyButton1, "mouseout");
         }
+    }
+
+    if(practiceOn){
+
+        var button2 = document.getElementById("button2");
+        var button3 = document.getElementById("button3");
+        var insidebutton2 = button2HoverCheck(x+15, y+15);
+        var insidebutton3 = button3HoverCheck(x+15, y+15);
+
+        var checkInsideStatus = insidebutton2 || insidebutton3;
+
+        if (insidebutton2 && button2.overState === "out")
+        {
+            simulate(button2, "mouseover");
+        }
+
+        if (!insidebutton2 && button2.overState === "over")
+        {
+            simulate(button2, "mouseout");
+        }
+
+
+        if (insidebutton3 && button3.overState === "out")
+        {
+            simulate(button3, "mouseover");
+        }
+
+        if (!insidebutton3 && button3.overState === "over")
+        {
+            simulate(button3, "mouseout");
+        }
+        
     }
 }
 
@@ -274,7 +326,7 @@ function handleMessage(evt) {
 // }
 
 function dump(){
-    console.log(cursorHistory);
+    //console.log(cursorHistory);
 }
 
 var resetBullsEye = function(selection){
@@ -366,6 +418,41 @@ var button1HoverCheck = function (x , y) {
 
 }
 
+var button2HoverCheck = function (x ,y) {
+
+    var inside = false;
+    if(x < 741 && x>640 && y<461 && y > 360)
+        inside  = true;
+
+    return inside;
+}
+ var switchPosition = false;
+
+var button3HoverCheck = function (x ,y) {
+
+   
+    var inside = false;
+    if(switchPosition) {
+        if(x < 741 && x>640 && y<721 && y > 620){
+            inside  = true;
+        }
+    }
+    else 
+    {
+        if ((x < 1281 && x>1180 && y<461 && y > 360)){
+            inside = true;
+        }
+    }
+        
+
+    return inside;
+}
+
+window.switchPositionFunc = function (x){
+ switchPosition = x;
+
+}
+
 function mousemovefunc(e) {
     armCursor.style.top = e.clientY -15 + "px";
     armCursor.style.left = e.clientX -15 + "px";
@@ -373,8 +460,39 @@ function mousemovefunc(e) {
     g_xcursor = e.clientX;
     g_ycursor = e.clientY;
 
+    if(practiceOn){
+
+        var button2 = document.getElementById("button2");
+        var button3 = document.getElementById("button3");
+        var insidebutton2 = button2HoverCheck(e.clientX, e.clientY);
+        var insidebutton3 = button3HoverCheck(e.clientX, e.clientY);
+
+        var checkInsideStatus = insidebutton2 || insidebutton3;
+
+        if (insidebutton2 && button2.overState === "out")
+        {
+            simulate(button2, "mouseover");
+        }
+
+        if (!insidebutton2 && button2.overState === "over")
+        {
+            simulate(button2, "mouseout");
+        }
+
+
+        if (insidebutton3 && button3.overState === "out")
+        {
+            simulate(button3, "mouseover");
+        }
+
+        if (!insidebutton3 && button3.overState === "over")
+        {
+            simulate(button3, "mouseout");
+        }
+        
+    }
     
-    if(!calibrationOn)
+    if(!calibrationOn && !practiceOn)
     {
         
 
@@ -649,6 +767,25 @@ function azMinResetHandler(e){
 
 // }
 
+function startStudyButtonHandler(e) {
+
+    var practiceElements = document.querySelectorAll(".practicebutton");
+        
+    var i;
+
+    for (i = 0; i < practiceElements.length; i++) {
+            practiceElements[i].style.display = "none";
+    }
+    practiceOn = false;
+    
+    var lev = localStorage.getItem("level");
+    document.getElementById(lev).appendChild(MyButton1);
+
+    document.getElementById("button0").style.display = "block";   
+    // var practiceCheckv = localStorage.getItem("practiceCheck");
+    localStorage.setItem("practiceCheck", 2);
+}
+
 function startExpButtonHandler(e) {
     // AZIMUTH_MIN = min_azimuth;
     // AZIMUTH_MAX = max_azimuth;
@@ -656,30 +793,50 @@ function startExpButtonHandler(e) {
     // INCLINATION_MAX = max_inclination;
 
 
+  
+
     AZIMUTH_MIN = azimuth_min;
     AZIMUTH_MAX = azimuth_max;
     INCLINATION_MIN = inclination_min;
     INCLINATION_MAX = inclination_max;
 
+    var practiceElements = document.querySelectorAll(".practicebutton");
     var experimentElements = document.querySelectorAll(".calibrationoff");
     var calibrationElements = document.querySelectorAll(".calibrationon");
 
     var i;
-    for (i = 0; i < experimentElements.length; i++) {
-        experimentElements[i].style.display = "block";
-    }
-
 
     for (i = 0; i < calibrationElements.length; i++) {
         calibrationElements[i].style.display = "none";
     }
 
-    //document.getElementById("button1").style.display = "block";
-    //document.getElementById(zoneNumber.toString()).appendChild(Button1);
-    var lev = localStorage.getItem("level");
-    document.getElementById(lev).appendChild(MyButton1);
+    for (i = 0; i < experimentElements.length; i++) {
+        experimentElements[i].style.display = "block";
+    }
 
+    if(practiceCheckvv == 1) {
+        for (i = 0; i < practiceElements.length; i++) {
+            practiceElements[i].style.display = "block";
+        }
+        practiceOn = true;
+    }
+    else if(practiceCheckvv ==2) {
+
+
+        //document.getElementById("button1").style.display = "block";
+        //document.getElementById(zoneNumber.toString()).appendChild(Button1);
+        var lev = localStorage.getItem("level");
+        document.getElementById(lev).appendChild(MyButton1);
+
+        document.getElementById("button0").style.display = "block";
+
+    }
+    else {
+        console.log("Error");
+    }
+    
     calibrationOn = false;
+
 
     // azimuth_ul = localStorage.getItem("ul_azimuth");
     // azimuth_ur = localStorage.getItem("ur_azimuth");
@@ -744,6 +901,7 @@ document.getElementById("azMaxResetCalibButton").addEventListener("click", azMax
 document.getElementById("azMinResetCalibButton").addEventListener("click", azMinResetHandler);
 
 document.getElementById("startExperiment").addEventListener("click", startExpButtonHandler);
+document.getElementById("startStudy").addEventListener("click", startStudyButtonHandler);
 };
 
 window.addEventListener("DOMContentLoaded", docLoadedFuncCursor);

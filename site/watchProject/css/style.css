@@ -21,6 +21,10 @@ body {
  display: none;
 }
 
+#button0 {
+	display: none;
+}
+
 .calibrationon {
 text-align: left;
 margin-left: auto;
@@ -77,6 +81,29 @@ p {
   	margin-right: auto;
 	outline:none;    
 
+}
+
+.practicebutton {
+    background-color:green;
+    border: none;
+	outline:none;    
+	display: none;
+	width:100px;
+	height:100px;
+	position: absolute;
+}
+
+#button2 {
+top: 0px;
+left: 0px;
+/*float:right;*/
+}
+
+#button3 {
+top: 0px;
+left: 540px;
+background-color:white;
+opacity: 0.1;
 }
 
 body>div {

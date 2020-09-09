@@ -4,6 +4,7 @@ function docLoadedFunc()
 	var posturev = localStorage.getItem("posture");
 	var indexofdifv = localStorage.getItem("indexofdif");
 	var levelv = localStorage.getItem("level");
+	var practiceCheckv = localStorage.getItem("practiceCheck");
 
 
 	//console.log(participantIDv);
@@ -43,6 +44,14 @@ function docLoadedFunc()
 		console.log("unable to read zone from storage");
 	}
 
+	if(practiceCheckv != undefined || practiceCheckv != null) {
+		document.getElementById("practiceCheck").value = practiceCheckv;
+		console.log("Last saved PracticeCheck status", practiceCheckv);	
+	}
+	else
+	{
+		console.log("unable to read practiceCheck from storage");
+	}
 	document.getElementById("formSubmission").addEventListener( "click", formDetails);
 	
 
@@ -52,6 +61,7 @@ function docLoadedFunc()
 		indexofdifv = document.getElementById("indexofdif").value;
 		posturev = document.getElementById("posture").value;
 		participantIDv = document.getElementById("participantID").value;
+		practiceCheckv = document.getElementById("practiceCheck").value;
 		
 		//console.log("recalibrationRequired ", recalibrationRequired, "level ", level, "indexofdif ", indexofdif, "posture ", posture, "participantID ", participantID );
 
@@ -59,6 +69,7 @@ function docLoadedFunc()
 		localStorage.setItem("indexofdif", indexofdifv);
 		localStorage.setItem("level", levelv);
 		localStorage.setItem("posture", posturev);
+		localStorage.setItem("practiceCheck", practiceCheckv);
 
 		//window.location.href = "experiment.html";
 		window.location.href = "Calibration.html";

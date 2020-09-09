@@ -42,6 +42,8 @@ var indexofdifvv = localStorage.getItem("indexofdif");
 var participantIDvv = localStorage.getItem("participantID");
 var posturevv = localStorage.getItem("posture");
 var levelvv = localStorage.getItem("level");
+var practiceCheckvv = localStorage.getItem("practiceCheck");
+window.practiceCheckvv = practiceCheckvv;
 
 if(indexofdifvv != undefined && indexofdifvv != null) {
 	difficultyLevel = indexofdifvv;
@@ -52,7 +54,7 @@ if(levelvv != undefined && levelvv != null) {
 	zoneNumber = levelvv;
 }
 
-console.log("Values received in calibration page", "ParticipantID ", participantIDvv, "PostureID ", posturevv, "ID value ", indexofdifvv, "Zone value ", levelvv);
+console.log("Values received in calibration page", "ParticipantID = ", participantIDvv, "PostureID = ", posturevv, "ID value = ", indexofdifvv, "Zone value =", levelvv, "PracticeCheck =", practiceCheckvv);
 
 var firstButtonSize =0;
 var x_offset =0, y_offset =0;
@@ -203,6 +205,13 @@ button0.overState = "out";
 Button1.overState = "out";
 //Initial condition over
 
+var button2 = document.getElementById("button2");
+var button3 = document.getElementById("button3");
+button2.overState = "out";
+button3.overState = "out";
+
+button2ClickCount = 0;
+button3ClickCount = 0;
 
 //var buttonSize = (Math.pow(2,difficultyLevel) -1);
 
@@ -225,7 +234,6 @@ var objectNameFocussed = null;
 
 function clickFunc(){
 	
-
 	//if()
 	simulate(objectNameFocussed, "click");
 }
@@ -644,6 +652,101 @@ function changeColorClick(event){
 
 };
 
+var switchPosition = false;
+window.switchPosition = switchPosition;
+
+function changeColorEnter3(event){
+	button3.style.backgroundColor = "yellow";
+	button3.overState = "over";
+	objectNameFocussed = button3;
+};
+
+function changeColorLeave3(event){
+	button3.style.backgroundColor = "green";
+	button3.overState = "out";
+	objectNameFocussed = null;
+};
+
+function changeColorClick3(event){
+	button3ClickCount++;
+
+	if(( button3ClickCount % 5 == 0)){
+		if(switchPosition){
+
+			// button2.style.top = 0;
+			// button2.style.left = 0;
+
+			 button3.style.top = "0px";
+			 button3.style.left = "540px";
+			switchPosition = false;
+			switchPositionFunc(switchPosition);
+		}
+		else{
+				button3.style.top = "260px";
+			 	button3.style.left = "0px";
+			// button2.style.top = 540;
+			// button2.style.left = 0;
+
+			// button3.style.top = 0;
+			// button3.style.left = 260;
+			switchPosition = true;
+			switchPositionFunc(switchPosition);
+	}
+}
+
+	button2.style.backgroundColor = "green";
+	button3.style.backgroundColor = "white";
+	button3.style.opacity = 0.1;
+	button2.style.opacity = 1.0;
+	document.getElementById("button2").style.opacity = 1.0;
+
+	button3.removeEventListener("click",changeColorClick3);
+	button3.removeEventListener("mouseover",changeColorEnter3);
+	button3.removeEventListener("mouseout",changeColorLeave3);
+
+	button2.addEventListener("click",changeColorClick2);
+	button2.addEventListener("mouseover",changeColorEnter2);
+	button2.addEventListener("mouseout",changeColorLeave2);	
+	//}
+}
+
+
+function changeColorEnter2(event){
+	button2.style.backgroundColor = "yellow";
+	objectNameFocussed = button2;
+	button2.overState = "over";
+};
+
+function changeColorLeave2(event){
+	
+	button2.style.backgroundColor = "green";
+	button2.overState = "out";
+	objectNameFocussed = null;
+};
+
+
+function changeColorClick2(event){
+	
+	button2.style.backgroundColor = "white";
+	button3.style.backgroundColor = "green";
+
+	button2.removeEventListener("click",changeColorClick2);
+	button2.removeEventListener("mouseover",changeColorEnter2);
+	button2.removeEventListener("mouseout",changeColorLeave2);
+
+
+	button3.style.opacity = 1.0;
+	button2.style.opacity = 0.1;
+
+	button3.addEventListener("click",changeColorClick3);
+	button3.addEventListener("mouseover",changeColorEnter3);
+	button3.addEventListener("mouseout",changeColorLeave3);
+
+	button2ClickCount++;
+};
+
+
+
 
 
 document.getElementById("button0").addEventListener("click",changeColorClick);
@@ -653,6 +756,17 @@ document.getElementById("button0").addEventListener("click",changeColorClick);
 //for simulator
 document.getElementById("button0").addEventListener("mouseover",changeColorEnter);
 document.getElementById("button0").addEventListener("mouseout",changeColorLeave);
+
+
+document.getElementById("button2").addEventListener("click",changeColorClick2);
+document.getElementById("button2").addEventListener("mouseover",changeColorEnter2);
+document.getElementById("button2").addEventListener("mouseout",changeColorLeave2);
+
+// document.getElementById("button3").addEventListener("click",changeColorClick3);
+// document.getElementById("button3").addEventListener("mouseover",changeColorEnter3);
+// document.getElementById("button3").addEventListener("mouseout",changeColorLeave3);
+
+
 //for simulator ends
 
 //Button1.addEventListener("mouseenter",changeColorEntera);
