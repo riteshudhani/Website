@@ -904,7 +904,7 @@ function mouseclickfunc(e){
 
 connectButton.onclick = init;
 //setInterval(evaluateDwell, 300);
-//window.addEventListener("mousemove", mousemovefunc) ;
+window.addEventListener("mousemove", mousemovefunc) ;
 window.addEventListener("click", mouseclickfunc) ;
 
 // document.getElementById("lrCalibButton").addEventListener("click", lrCalibButtonHandler);
