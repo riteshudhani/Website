@@ -87,20 +87,20 @@ function cursorClicked(e){
         {
             simulate(document.getElementById("button0"), "click");
             clickPositionInsideTarget = true;
-            addHistory(g_xcursor, g_ycursor,  g_azimuth, g_inclination, true, 0);
+            addHistory(g_xcursor + 15, g_ycursor + 15,  g_azimuth, g_inclination, true, 0);
         }
 
         if (insidebutton1 && MyButton1.overState === "over")
         {
             simulate(MyButton1, "click");
             clickPositionInsideTarget = true;
-            addHistory(g_xcursor, g_ycursor,  g_azimuth, g_inclination, true, 0);
+            addHistory(g_xcursor + 15, g_ycursor + 15,  g_azimuth, g_inclination, true, 0);
         }
 
         if(!insidebutton0 && !insidebutton1)
         {
             //clickPositionInsideTarget = false;
-            addHistory(g_xcursor, g_ycursor,  g_azimuth, g_inclination, false, 1);
+            addHistory(g_xcursor + 15, g_ycursor + 15,  g_azimuth, g_inclination, false, 1);
         }
     }
     else if (practiceOn){
@@ -204,7 +204,7 @@ function handleMessage(evt) {
 
         var checkInsideStatus = insidebutton0 || insidebutton1;
 
-        addHistory(x, y, azimuth, inclination,checkInsideStatus, 0);
+        addHistory(x + 15, y + 15, azimuth, inclination,checkInsideStatus, 0);
 
         if (insidebutton0 && button0.overState === "out")
         {

@@ -16,9 +16,8 @@ body {
 	box-sizing: border-box;
 }
 
-
 .calibrationoff {
- display: none;
+ 	display: none;
 }
 
 #button0 {
@@ -26,9 +25,9 @@ body {
 }
 
 .calibrationon {
-text-align: left;
-margin-left: auto;
-margin-right: auto;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
 
 }
 /*@media (min-width: 992px)
